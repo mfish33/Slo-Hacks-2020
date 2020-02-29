@@ -1,0 +1,16 @@
+#dataSide{
+    height:100%;
+    background-color: crimson;
+    width: 100%
+}
+nav{
+    width: 5rem;
+    background-color: black;
+    color:white;
+
+}
+#wrapper{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,11 @@
+#graphSide{
+    height:100%;
+    background-color: green;
+}
+nav{
+    background-color:black;
+    color:white;
+    height: 4%;
+    float: right;
+    width: auto
+}
