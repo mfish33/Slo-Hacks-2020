@@ -1,6 +1,5 @@
 #graphSide{
     height:100%;
-    background-color: green;
 }
 nav{
     background-color:black;
@@ -8,4 +7,7 @@ nav{
     height: 4%;
     float: right;
     width: auto
+}
+:host{
+    width: 50%;
 }

@@ -1,0 +1,8 @@
+<div class="loginWrapper">
+    <ngx-auth-firebaseui 
+    (onSuccess)="printUser($event)" 
+    (onError)="printError($event)" 
+    [providers] = "['google']"
+    [verifyEmailTemplate] = "false">
+</ngx-auth-firebaseui>
+</div>

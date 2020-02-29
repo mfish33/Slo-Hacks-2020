@@ -1,0 +1,40 @@
+<mat-card class="card">
+    <h2>Living Expenses:</h2>
+        <form [formGroup]="expenses" class="example-form">
+                <div *ngFor="let expense of expenses.controls; let i =index" [formGroupName]="i" >
+                    <mat-card class="innerCard my-animation">
+            
+                        <mat-form-field class="example-full-width" class="example-full-width">
+                                <input matInput formControlName="expense" placeholder="Expense Name">
+                        </mat-form-field>
+            
+                        <div id="container">
+            
+                        <mat-form-field class="number input-icon-right">
+                                <input matInput formControlName="weekly" placeholder="weekly" type="number" min="0">
+                                <mat-icon matSuffix>attach_money</mat-icon>
+                        </mat-form-field> 
+            
+                        <mat-form-field class="number">
+                                <input matInput formControlName="monthly" placeholder="monthly" type="number" min="0">
+                                <mat-icon matSuffix>attach_money</mat-icon>
+                        </mat-form-field>
+            
+                        <mat-form-field class="number">
+                                <input matInput formControlName="yearly" placeholder="yearly" type="number" min="0">
+                                <mat-icon matSuffix>attach_money</mat-icon>
+                        </mat-form-field>
+            
+                        <button mat-raised-button color="warn" (click) ="deleteExpense(i)" class= "delete">X</button>
+            
+                    </div>
+            
+                </mat-card>
+                </div>
+                <div class="addButtonCenter">
+                    <button mat-raised-button color="primary" (click) ="addExpense()">ADD</button>
+                </div>
+                
+            </form>
+                  
+</mat-card>
