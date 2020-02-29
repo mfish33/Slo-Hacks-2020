@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "polyhacks-2020-56b90": {
+      "hosting": {
+        "Polyhacks2020": [
+          "polyhacks-2020-56b90"
+        ]
+      }
+    }
+  }
+}
