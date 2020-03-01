@@ -96,6 +96,7 @@ export class BasicInfoComponent implements OnInit {
       debounceTime(500))
       .subscribe(update =>{
          this.dataService.updateData({personalInfo: update});
+         this.dataService.updateData({taxes: this.taxInfo});
       });
    }
 
