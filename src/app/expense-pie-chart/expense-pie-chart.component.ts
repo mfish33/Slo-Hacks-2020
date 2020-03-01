@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import  palette from 'google-palette/palette'
 import {DataStoreService} from '../services/data-store.service'
+import { Form } from '../services/formModel'
 
 @Component({
   selector: 'app-expense-pie-chart',
@@ -15,12 +16,11 @@ export class ExpensePieChartComponent implements OnInit {
   chartData:{label:string[],data:number[]} = {label:[],data:[]}
 
   constructor(dataStore:DataStoreService) {
-    dataStore.doc$.subscribe(data => {
-      console.log(data)
+    dataStore.doc$.subscribe((data:Form) => {
       let labels = [], dataVals =[]; 
       for(let expense of data.expenses) {
         labels.push(expense.expense)
-        dataVals.push(expense.weekly)
+        dataVals.push(expense.monthly)
       }
       this.chart.chart.data.datasets[0].data = dataVals
       this.chart.chart.data.labels = labels
@@ -46,7 +46,7 @@ export class ExpensePieChartComponent implements OnInit {
         options: {
           title: {
             display: true,
-            text: 'Predicted world population (millions) in 2050'
+            text: 'Your Monthly expenses (dollars)'
           }
         }
     });

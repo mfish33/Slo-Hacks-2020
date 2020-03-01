@@ -1,5 +1,5 @@
 export interface Form{
-    personalInfo:object
+    personalInfo:any
     taxes:object
     expenses:expense[]
     lifeChoices:object

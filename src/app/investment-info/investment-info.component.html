@@ -1,0 +1,64 @@
+<mat-card class="card">
+        <h2>Investments:</h2>
+        <p>You have ${{moneyLeft}} to invest</p>
+            <form [formGroup]="investmentForm" class="example-form">
+                    
+    
+                
+                           
+                
+                            <div id="container">
+                       
+                              <mat-form-field class="IRAType">
+                              <select matNativeControl placeholder = "IRA Type" formControlName = "IRAType">
+                                <option value="Traditional">Traditional</option>
+                                <option value="Roth">Roth</option>
+                                <option value="Rollover">Rollover</option>
+                              </select>
+                              </mat-form-field>
+
+                              <mat-form-field class="spread">
+                                    <input matInput formControlName="IRAAmount" placeholder="IRA Contribution" type="number" min="0">
+                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                </mat-form-field> 
+            
+
+                            </div>
+
+                            <div id="container">
+                       
+                                    <mat-form-field class="spread">
+                                            <input matInput formControlName="401k" placeholder="401k Contribution" type="number" min="0">
+                                            <mat-icon matSuffix>attach_money</mat-icon>
+                                        </mat-form-field> 
+
+                                    <mat-form-field class="spread">
+                                          <input matInput formControlName="401kContrib" placeholder="Employer match percent" type="number" min="0" max ="100">
+                                          <mat-icon matSuffix>attach_money</mat-icon>
+                                      </mat-form-field> 
+                  
+      
+                                  </div>
+
+
+                                  <div id="container">
+                       
+                                     
+                                        <span>Stock Account:</span>
+                                        
+
+    
+                                            <mat-form-field class="example-full-width" class="example-full-width">
+                                                    <input matInput formControlName="stocks" placeholder="Amount" type="number" min="0">
+                                            </mat-form-field>
+                      
+          
+                                      </div>
+
+                                  
+    
+    
+                    
+                </form>
+                      
+    </mat-card>

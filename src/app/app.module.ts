@@ -14,7 +14,8 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { HomePageComponent } from './home-page/home-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BasicInfoComponent } from './basic-info/basic-info.component'
-import { ExpensePieChartComponent } from './expense-pie-chart/expense-pie-chart.component'
+import { ExpensePieChartComponent } from './expense-pie-chart/expense-pie-chart.component';
+import { InvestmentInfoComponent } from './investment-info/investment-info.component'
 
 
 
@@ -28,7 +29,8 @@ import { ExpensePieChartComponent } from './expense-pie-chart/expense-pie-chart.
     HomePageComponent,
     DashboardComponent,
     BasicInfoComponent,
-    ExpensePieChartComponent
+    ExpensePieChartComponent,
+    InvestmentInfoComponent
   ],
   imports: [
     BrowserModule,

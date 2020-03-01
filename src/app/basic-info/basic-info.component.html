@@ -17,7 +17,7 @@
                          </mat-form-field>
 
                          <mat-form-field class="spread">
-                         <select matNativeControl placeholder = "State" formControlName="states">
+                         <select matNativeControl placeholder = "State" formControlName="state">
                            <option *ngFor="let state of objectKeys(states)" [value]="states[state]">{{states[state]}}</option>
                          </select>
                          </mat-form-field>

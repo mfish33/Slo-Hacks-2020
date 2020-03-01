@@ -1,0 +1,5 @@
+:host{margin:20px;}
+
+#container{display: flex;justify-content: space-around;}
+
+.spread{width: 26%}
