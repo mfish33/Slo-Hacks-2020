@@ -1,54 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormArray } from '@angular/forms'
+import {FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {DataStoreService} from '../services/data-store.service';
+import {debounceTime, take, debounce} from 'rxjs/operators';
 
 @Component({
   selector: 'app-basic-info',
-  template: `
-    <mat-card class="card">
-    <h2>Basic Info:</h2>
-        <form [formGroup]="basicInfoForm" class="example-form">
-                
-
-            
-                        <mat-form-field class="example-full-width" class="example-full-width">
-                                <input matInput formControlName="sheetName" placeholder="Plan Name">
-                        </mat-form-field>
-            
-                        <div id="container">
-            
-                          <mat-form-field class="spread">
-                                  <input matInput formControlName="income" placeholder="income" type="number" min="0">
-                                  <mat-icon matSuffix>attach_money</mat-icon>
-                          </mat-form-field> 
-              
-                          <mat-form-field class="spread">
-                                  <input matInput formControlName="age" placeholder="age" type="number" min="0">
-                          </mat-form-field>
-              
-                          <mat-form-field class="spread">
-                          <select matNativeControl placeholder = "State">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                          </select>
-                          </mat-form-field>
-                        </div>
-
-
-                
-            </form>
-                  
-</mat-card>
-
-  `,
+  templateUrl: './basic-info.component.html',
   styles: [':host{margin:20px;}','  #container{display: flex;justify-content: space-between;}',' .spread{width: 26%}']
 })
 export class BasicInfoComponent implements OnInit {
 
-  basicInfoForm:FormGroup
+  basicInfoForm: FormGroup
 
-  constructor(private fb: FormBuilder) { }
+  objectKeys = Object.keys
+
+  states = {
+   AK : 'Alabama',
+   AL : 'Alaska',
+   AR : 'Arizona',
+   AZ : 'Arkansas',
+   CA : 'California',
+   CO : 'Colorado',
+   CT : 'Connecticut',
+   DE : 'Delaware',
+   FL : 'Florida',
+   GA : 'Georgia',
+   HI : 'Hawaii',
+   IA : 'Idaho',
+   ID : 'Illinois',
+   IL : 'Indiana',
+   IN : 'Iowa',
+   KS : 'Kansas',
+   KY : 'Kentucky',
+   LA : 'Louisiana',
+   MA : 'Maine',
+   MD : 'Maryland',
+   ME : 'Massachusetts',
+   MI : 'Michigan',
+   MN : 'Minnesota',
+   MO : 'Mississippi',
+   MS : 'Missouri',
+   MT : 'Montana',
+   NC : 'North Carolina',
+   ND : 'North Dakota',
+   NE : 'Nebraska',
+   NH : 'New Hampshire',
+   NJ : 'New Jersey',
+   NM : 'New Mexico',
+   NV : 'Nevada',
+   NY : 'New York',
+   OH : 'Ohio',
+   OK : 'Oklahoma',
+   OR : 'Oregon',
+   PA : 'Pennsylvania',
+   RI : 'Rhode Island',
+   SC : 'South Carolina',
+   SD : 'South Dakota',
+   TN : 'Tennessee',
+   TX : 'Texas',
+   UT : 'Utah',
+   VA : 'Virginia',
+   VT : 'Vermont',
+   WA : 'Washington',
+   WI : 'Wisconsin',
+   WV : 'West Virginia',
+   WY : 'Wyoming'
+  }
+
+  constructor(private fb: FormBuilder, private dataService: DataStoreService) { }
 
   ngOnInit(): void {
     this.basicInfoForm = this.fb.group({
@@ -56,7 +75,15 @@ export class BasicInfoComponent implements OnInit {
       income:0,
       age:25,
       state:'',
-    })
-  }
+    });
 
+    this.dataService.doc$.pipe(take(1)).subscribe(retreive => {
+         this.basicInfoForm.patchValue(retreive.personalInfo);
+      });
+
+    this.basicInfoForm.valueChanges.pipe(debounceTime(500))
+      .subscribe(update =>{
+         this.dataService.updateData({personalInfo: update});
+      });
+   }
 }

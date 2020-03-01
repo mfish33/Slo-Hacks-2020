@@ -1,0 +1,27 @@
+<mat-card class="card">
+   <h2>Basic Info:</h2>
+       <form [formGroup]="basicInfoForm" class="example-form">
+                       <mat-form-field class="example-full-width" class="example-full-width">
+                               <input matInput formControlName="sheetName" placeholder="Plan Name">
+                       </mat-form-field>
+
+                       <div id="container">
+
+                         <mat-form-field class="spread">
+                                 <input matInput formControlName="income" placeholder="income" type="number" min="0">
+                                 <mat-icon matSuffix>attach_money</mat-icon>
+                         </mat-form-field> 
+
+                         <mat-form-field class="spread">
+                                 <input matInput formControlName="age" placeholder="age" type="number" min="0">
+                         </mat-form-field>
+
+                         <mat-form-field class="spread">
+                         <select matNativeControl placeholder = "State" formControlName="states">
+                           <option *ngFor="let state of objectKeys(states)" [value]="states[state]">{{states[state]}}</option>
+                         </select>
+                         </mat-form-field>
+                       </div>
+           </form>
+                 
+</mat-card>
