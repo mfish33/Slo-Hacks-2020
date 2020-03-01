@@ -17,7 +17,8 @@ import { BasicInfoComponent } from './basic-info/basic-info.component'
 import { ExpensePieChartComponent } from './expense-pie-chart/expense-pie-chart.component';
 import { InvestmentInfoComponent } from './investment-info/investment-info.component';
 import { InvestmentChartComponent } from './investment-chart/investment-chart.component';
-import { ExpenseWidgetComponent } from './expense-widget/expense-widget.component'
+import { ExpenseWidgetComponent } from './expense-widget/expense-widget.component';
+import { BudgetPieComponent } from './budget-pie/budget-pie.component'
 
 
 
@@ -34,7 +35,8 @@ import { ExpenseWidgetComponent } from './expense-widget/expense-widget.componen
     ExpensePieChartComponent,
     InvestmentInfoComponent,
     InvestmentChartComponent,
-    ExpenseWidgetComponent
+    ExpenseWidgetComponent,
+    BudgetPieComponent
   ],
   imports: [
     BrowserModule,

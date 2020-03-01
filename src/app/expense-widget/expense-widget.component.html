@@ -1,3 +1,7 @@
 <mat-card>
-    <span>You have {{moneyLeft}} to budger</span>
+    <div class="wrapper">
+            <span>{{dataStore.currentBudget ? dataStore.currentBudget.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 0}}</span>
+            <span>left to budget</span>
+    </div>
+    
 </mat-card>

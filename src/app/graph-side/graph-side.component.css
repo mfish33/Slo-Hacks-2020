@@ -1,5 +1,8 @@
 #graphSide{
+    display: flex;
+    flex-direction: column;
     height:100%;
+    overflow:auto;
 }
 nav{
     background-color:black;
@@ -10,4 +13,24 @@ nav{
 }
 :host{
     width: 50%;
+}
+
+#graphSide::-webkit-scrollbar{
+    width: .25rem;
+}
+
+#graphSide::-webkit-scrollbar-track{
+    background: white;
+}
+
+#graphSide::-webkit-scrollbar-thumb{
+    background: white
+}
+
+.graph{
+    margin: 20px
+}
+
+.topGraph{
+    margin-top: 5rem
 }

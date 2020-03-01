@@ -34,7 +34,8 @@
 }
 
 #formCenter::-webkit-scrollbar-thumb{
-    background: black
+    background: black;
+    height:100%
 }
 
 .navbar {

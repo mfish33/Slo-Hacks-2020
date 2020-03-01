@@ -12,18 +12,18 @@ export class InvestmentChartComponent implements OnInit {
 
   constructor(private dataStore:DataStoreService) { 
     dataStore.doc$.subscribe((data:Form) => {
-      let investmetCalc = [{'401k':data.investment["401k"], IRA:data.investment.IRAAmount, stocks:data.investment.stocks}]
+      let investmetCalc = [{'401k':data.investment["401k"] * data.investment["401kContrib"] / 100, IRA:data.investment.IRAAmount, stocks:data.investment.stocks}]
       let age = data.personalInfo.age
       let dataPoints = [age]
       for(let i = 1; age + i < 65; i++) {
         dataPoints.push(age + i)
         investmetCalc[i] = {
-          '401k': data.investment["401k"] + investmetCalc[i-1]["401k"]*1.06, 
+          '401k': data.investment["401k"] * data.investment["401kContrib"] / 100 + investmetCalc[i-1]["401k"]*1.06, 
           IRA:data.investment.IRAAmount + investmetCalc[i-1].IRA*1.08, 
           stocks:data.investment.stocks + investmetCalc[i-1].stocks*1.1
         }
       }
-      let retirementExpense = 50000
+      let retirementExpense = data.personalInfo.income / 2;
 
       for(let j = 65 - age; j < 86 - age; j++) {
         dataPoints.push(age + j)
@@ -64,7 +64,7 @@ export class InvestmentChartComponent implements OnInit {
           callbacks: {
             label: function(tooltipItem, data) {
               var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + tooltipItem.yLabel.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) ;
+              return `${datasetLabel} ` + tooltipItem.yLabel.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) ;
             }
           }
         }
