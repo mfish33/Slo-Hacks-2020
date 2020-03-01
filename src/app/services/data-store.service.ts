@@ -17,7 +17,7 @@ export class DataStoreService {
 
     this.doc$ = this.auth.user$.pipe(
       switchMap(user => this.afs.collection('plans').doc(user.uid).snapshotChanges()),
-      switchMap(doc => !doc.payload.exists ? from(doc.payload.ref.set(this.createDefaultTemplate())) : of(doc)),
+      switchMap(doc => !doc.payload.exists ? from(doc.payload.ref.set({forms:[this.createDefaultTemplate()]})) : of(doc)),
       //@ts-ignore
       map(doc => doc.payload.data())
     )

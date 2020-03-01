@@ -1,13 +1,58 @@
 <div id="wrapper">
 
-<nav>
-    <p>Life Choices</p>
-</nav>
+        <nav class="navbar">
+                <ul class="navbar-nav">
+                        <li class="logo" >
+                                <a href="#" class="nav-link">
+                                <span class="link-text">RFD</span>
+                                <mat-icon class="hideOnHover">double_arrow</mat-icon>
+                                
+                        </a>
+
+                <li class="nav-item">
+                        <a (click)="scroll(basicInfo)" class="nav-link">
+                                <mat-icon class="fa-group">info</mat-icon>
+                            <span class="link-text">Personal Info</span>
+                        </a>
+                        </li>
+            
+                  <li class="nav-item">
+                    <a (click)="scroll(livingExpenses)" class="nav-link">
+                            <mat-icon class="fa-group">attach_money</mat-icon>
+                      <span class="link-text">Expenses</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                        <a (click)="scroll(investmentInfo)" class="nav-link">
+                                <mat-icon class="fa-group">timeline</mat-icon>
+                          <span class="link-text">Investments</span>
+                        </a>
+                      </li>
+            
+                             
+                  <li class="nav-item" id="themeButton">
+                    <a (click) ="auth.signOut()" class="nav-link">
+                        
+                    <mat-icon class="fa-group">person</mat-icon>
+                    <span class="link-text">Sign Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            
 <div id='formCenter'>
     <div id= 'formInput'>
+        <div  #basicInfo>
             <app-basic-info></app-basic-info>
-        <app-living-expenses></app-living-expenses>
-        <app-investment-info></app-investment-info>
+        </div>
+        <div #livingExpenses>
+            <app-living-expenses></app-living-expenses>
+        </div>
+        <div #investmentInfo>
+            <app-investment-info></app-investment-info>
+        </div>
+        
     </div>            
 </div>
 
