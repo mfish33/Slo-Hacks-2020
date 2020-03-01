@@ -1,30 +1,35 @@
 <mat-card class="card">
    <h2>Basic Info:</h2>
-       <form [formGroup]="basicInfoForm" class="example-form">
-                       <mat-form-field class="example-full-width" class="example-full-width">
-                               <input matInput formControlName="sheetName" placeholder="Plan Name">
-                       </mat-form-field>
 
-                       <div id="container">
-                         <mat-form-field class="spread">
-                                 <input matInput formControlName="age" placeholder="age" type="number" min="0">
-                         </mat-form-field>
+   <form [formGroup]="basicInfoForm" class="example-form">
+      <mat-form-field class="example-full-width" class="example-full-width">
+         <input matInput formControlName="sheetName" placeholder="Plan Name">
+      </mat-form-field>
 
-                         <mat-form-field class="spread">
-                                 <input matInput formControlName="income" placeholder="income" type="number" min="0">
-                                 <mat-icon matSuffix>attach_money</mat-icon>
-                         </mat-form-field> 
+      <div id="container">
+         <mat-form-field class="spread">
+            <input matInput formControlName="age" placeholder="age" type="number" min="0">
+         </mat-form-field>
 
-                         <mat-form-field class="spread">
-                                 <input matInput formControlName="age" placeholder="age" type="number" min="0">
-                         </mat-form-field>
+         <mat-form-field class="spread">
+            <input matInput formControlName="income" placeholder="income" type="number" min="0">
+            <mat-icon matSuffix>attach_money</mat-icon>
+         </mat-form-field> 
 
-                         <mat-form-field class="spread">
-                         <select matNativeControl placeholder = "State" formControlName="state">
-                           <option *ngFor="let state of objectKeys(states)" [value]="states[state]">{{states[state]}}</option>
-                         </select>
-                         </mat-form-field>
-                       </div>
-           </form>
-                 
+         <mat-form-field class="spread">
+            <select matNativeControl placeholder = "State" formControlName="state">
+               <option *ngFor="let state of objectKeys(states)" [value]="states[state]">{{states[state]}}</option>
+            </select>
+         </mat-form-field>
+      </div>
+   </form>
+</mat-card>
+
+<mat-card *ngIf='showTaxSection' class="card" style="margin-top: 60px;">
+   <h2>Estimated Taxes:</h2>
+   <div class="taxInfo">
+      <p>Effective Tax Rate: {{(this.taxInfo.effectiveTaxRate * 100).toFixed(2)}}%</p>
+      <p>Total Income Tax: {{formatMoney(this.taxInfo.totalIncomeTax)}}</p>
+      <p>Income after Taxes: {{formatMoney(this.taxInfo.incomeAfterTaxes)}}</p>
+   </div>
 </mat-card>
