@@ -1,9 +1,20 @@
 export interface Form{
-    personalInfo:any
+    personalInfo:{
+        sheetName:string,
+        income:number,
+        age:number,
+        state:string,
+      }
     taxes:object
     expenses:expense[]
     lifeChoices:object
-    investment:object
+    investment:{
+        '401k':number,
+        '401kContrib':number,
+        IRAType:string,
+        IRAAmount:number,
+        stocks:number
+      }
 
 }
 

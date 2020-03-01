@@ -90,7 +90,6 @@ export class BasicInfoComponent implements OnInit {
     this.basicInfoForm.valueChanges.pipe(
       tap((change) => {
             this.taxInfo.totalIncomeTax = this.calculateTaxes(change.income);
-            console.log(change.income / this.taxInfo.totalIncomeTax)
             this.taxInfo.effectiveTaxRate = this.taxInfo.totalIncomeTax / change.income;
             this.taxInfo.incomeAfterTaxes = change.income - this.taxInfo.totalIncomeTax;
          }),
