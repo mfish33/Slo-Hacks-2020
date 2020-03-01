@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormArray } from '@angular/forms'
 import { DataStoreService } from '../services/data-store.service'
 import {debounceTime, take, tap} from 'rxjs/operators'
+import { Form } from '../services/formModel'
 
 @Component({
   selector: 'app-living-expenses',
@@ -20,9 +21,9 @@ export class LivingExpensesComponent implements OnInit {
     this.expenses = this.fb.array([])
     this.dataStore.doc$.pipe(
       take(1)
-    ).subscribe(doc => {
+    ).subscribe((doc:Form) => {
      for(let expense of doc.expenses) {
-       this.addExpense(expense.name,expense.weekly)
+       this.addExpense(expense.expense,expense.weekly)
      }
     })
 

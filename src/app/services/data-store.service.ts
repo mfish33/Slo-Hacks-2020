@@ -33,7 +33,7 @@ export class DataStoreService {
     return {
       personalInfo:{},
       taxes:{},
-      expenses:[{name:"gas",weekly:0},{name:"car Payment", weekly:0}],
+      expenses:[{expense:"gas",weekly:0},{expense:"car Payment", weekly:0}],
       lifeChoices:{},
       investment:{}
     } as Form

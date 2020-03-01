@@ -8,6 +8,8 @@ export interface Form{
 }
 
 interface expense{
-    name:string
+    expense:string
     weekly:number
+    monthly:number
+    yearly:number
 }

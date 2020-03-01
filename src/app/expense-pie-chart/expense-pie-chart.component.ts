@@ -16,13 +16,17 @@ export class ExpensePieChartComponent implements OnInit {
 
   constructor(dataStore:DataStoreService) {
     dataStore.doc$.subscribe(data => {
-      let updatedData = {label:[],data:[]}
+      console.log(data)
+      let labels = [], dataVals =[]; 
       for(let expense of data.expenses) {
-        updatedData.label.push(expense.name)
-        updatedData.data.push(expense.weekly)
+        labels.push(expense.expense)
+        dataVals.push(expense.weekly)
       }
-      console.log('updated data')
-      this.chartData = updatedData
+      this.chart.chart.data.datasets[0].data = dataVals
+      this.chart.chart.data.labels = labels
+      this.chart.chart.data.datasets[0].backgroundColor = palette('tol', dataVals.length).map(hex => '#' + hex)
+      
+      this.chart.update()
     })
    }
 
