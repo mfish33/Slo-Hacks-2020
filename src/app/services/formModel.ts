@@ -5,7 +5,11 @@ export interface Form{
         age:number,
         state:string,
       }
-    taxes:object
+    taxes:{
+        effectiveTaxRate: number,
+        totalIncomeTax: number,
+        incomeAfterTaxes: number
+    }
     expenses:expense[]
     lifeChoices:object
     investment:{

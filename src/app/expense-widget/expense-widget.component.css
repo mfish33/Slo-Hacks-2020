@@ -1,0 +1,9 @@
+:host{
+    width: 100px;
+    height: 50px;
+    
+}
+
+mat-card{
+    float: right;
+}
