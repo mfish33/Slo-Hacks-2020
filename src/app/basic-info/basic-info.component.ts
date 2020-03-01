@@ -86,6 +86,7 @@ export class BasicInfoComponent implements OnInit {
     this.dataService.doc$.pipe(take(1)).subscribe(retreive => {
          this.basicInfoForm.patchValue(retreive.personalInfo);
       });
+      
 
     this.basicInfoForm.valueChanges.pipe(
       tap((change) => {

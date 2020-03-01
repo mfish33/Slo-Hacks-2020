@@ -1,6 +1,16 @@
     
     <nav>
-        1,2,3
+        <div class="innerNavWrapper">
+                <div class=".nav-link">
+                        <button mat-button (click) = "dataStore.createNewDoc()">+</button>
+                    </div>
+                <div  *ngFor = "let plan of dataStore.plans; let i = index"class=".nav-link">
+                        <button mat-button (click) = "dataStore.switchDoc(plan)">Plan: {{i + 1}}</button>
+                    </div>
+                    
+        </div>
+        
+        
     </nav>
     <div id= 'graphSide'>
         <app-expense-pie-chart class="graph topGraph"></app-expense-pie-chart>
