@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DataStoreService} from '../services/data-store.service'
-import {Form} from '../services/formModel'
 
 
 @Component({

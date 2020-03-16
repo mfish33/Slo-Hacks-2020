@@ -1,17 +1,18 @@
-    
-    <nav>
-        <div class="innerNavWrapper">
-                <div class=".nav-link">
-                        <button mat-button (click) = "dataStore.createNewDoc()">+</button>
-                    </div>
-                <div  *ngFor = "let plan of dataStore.plans; let i = index"class=".nav-link">
-                        <button mat-button (click) = "dataStore.switchDoc(plan)">Plan: {{i + 1}}</button>
-                    </div>
-                    
-        </div>
-        
-        
-    </nav>
+<div class="container">
+        <div class="whiteSpace"></div>
+        <div class="nav">
+                    <div (click) = "dataStore.createNewDoc()" class="nav-link">
+                            <span >+</span>
+                        </div>
+                    <div  *ngFor = "let plan of dataStore.plans; let i = index"class="nav-link" (click) = "dataStore.switchDoc(plan)">
+                            <span class = "spanButton" >Plan: {{i + 1}}</span>
+                        </div>                
+            </div>
+            
+</div>    
+
+
+
     <div id= 'graphSide'>
         <app-expense-pie-chart class="graph topGraph"></app-expense-pie-chart>
         <app-investment-chart class="graph"></app-investment-chart>

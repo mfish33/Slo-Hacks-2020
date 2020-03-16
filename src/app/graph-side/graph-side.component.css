@@ -1,53 +1,49 @@
 #graphSide{
-    display: flex;
-    flex-direction: column;
     height:100%;
     overflow:auto;
 }
-nav{
+.container{
+  display: flex;
+  justify-content: flex-end;
+  height: 5em;
+}
+
+.nav{
     background-color:#2c7ad0;
     color:white;
-    height: 5rem;
-    float: right;
-    width: auto;
     transition: width 600ms ease;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-.innerNavWrapper{
-    display: flex;
-    justify-content: space-between;
-}
 
-.navbar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-  }
+
   
   .nav-item {
-    width: 100%;
-    height: 100%;
+
   }
   
   .nav-item:last-child {
     margin-top: auto;
   }
+  .whiteSpace{
+    width: auto;
+  }
   
   .nav-link {
     display: flex;
-    align-items: center;
-    height: 5rem;
+    justify-content: center;
+    flex-direction: column;
     color: var(--text-primary);
     text-decoration: none;
     filter: grayscale(100%) opacity(0.7);
     transition: var(--transition-speed);
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .nav-link:hover{
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
   }
 
 
@@ -73,4 +69,11 @@ nav{
 
 .topGraph{
     margin-top: 5rem
+}
+
+:host{
+  --text-primary: white;
+  --text-secondary: #ececec;
+  --bg-primary: #2c7ad0;
+  --bg-secondary: #2366af;
 }

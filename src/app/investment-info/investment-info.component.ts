@@ -24,9 +24,7 @@ export class InvestmentInfoComponent implements OnInit {
       stocks:0
     })
 
-    this.dataStore.doc$.pipe(
-      take(1)
-    ).subscribe((doc:Form) => {
+    this.dataStore.doc$.subscribe((doc:Form) => {
      this.investmentForm.patchValue(doc.investment)
     })
 

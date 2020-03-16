@@ -83,8 +83,8 @@ export class BasicInfoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.dataService.doc$.pipe(take(1)).subscribe(retreive => {
-         this.basicInfoForm.patchValue(retreive.personalInfo);
+    this.dataService.doc$.subscribe(retrieve => {
+         this.basicInfoForm.patchValue(retrieve.personalInfo);
       });
       
 
