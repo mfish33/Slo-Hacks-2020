@@ -19,6 +19,7 @@ import { InvestmentInfoComponent } from './investment-info/investment-info.compo
 import { InvestmentChartComponent } from './investment-chart/investment-chart.component';
 import { ExpenseWidgetComponent } from './expense-widget/expense-widget.component';
 import { BudgetPieComponent } from './budget-pie/budget-pie.component'
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -40,6 +41,7 @@ import { BudgetPieComponent } from './budget-pie/budget-pie.component'
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

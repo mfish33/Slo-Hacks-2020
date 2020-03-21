@@ -46,7 +46,7 @@ export class InvestmentChartComponent implements OnInit {
   chart
 
   ngOnInit(): void {
-    this.chart = new Chart(document.getElementById("line-chart"), {
+    this.chart = new Chart("line-chart", {
       type: 'line',
       data: {
         datasets: [{ 

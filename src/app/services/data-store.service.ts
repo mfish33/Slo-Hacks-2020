@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {AuthServiceService} from './auth-service.service'
-import { from, of, Subject  } from 'rxjs';
+import { from, of, Subject, Observable  } from 'rxjs';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore'
 import { Form } from './formModel'
 import { switchMap, map, tap, take } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http'
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,9 @@ export class DataStoreService {
   plans:string[]
   currentBudget
   currentSub
-  private jsonStringifiedDoc
+  doc:Form
 
-  constructor(private auth:AuthServiceService, private afs:AngularFirestore) { 
+  constructor(private auth:AuthServiceService, private afs:AngularFirestore,private http:HttpClient) { 
     this.subToDoc()  
     }
 
@@ -74,7 +76,7 @@ export class DataStoreService {
       //@ts-ignore
       map(doc => doc.payload.data()),
       tap((doc:Form) => {
-        this.jsonStringifiedDoc = JSON.stringify(doc)
+        this.doc = doc
         let incomePostTax = doc.taxes.incomeAfterTaxes ? doc.taxes.incomeAfterTaxes / 12: 0
         let expenses = doc.expenses.reduce((acc,ex) => acc + ex.monthly,0)
         let investments = (doc.investment["401k"] ? doc.investment["401k"] : 0) + (doc.investment.IRAAmount ? doc.investment.IRAAmount : 0) + (doc.investment.stocks ?  doc.investment.stocks : 0)
@@ -83,5 +85,16 @@ export class DataStoreService {
       ).subscribe(doc => this.doc$.next(doc))
   }
 
+  downloadExcel() {
+    return this.http.post('https://us-central1-slo-hacks-python-gcf.cloudfunctions.net/GenExcel',JSON.stringify(this.doc),
+    {
+      headers:{
+       'content-type':'application/json'
+      },
+      responseType:'blob'
+    })
+  }
 
 }
+
+

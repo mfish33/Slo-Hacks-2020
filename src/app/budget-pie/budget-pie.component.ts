@@ -17,7 +17,8 @@ export class BudgetPieComponent implements OnInit {
 
   constructor(dataStore:DataStoreService) {
     dataStore.doc$.subscribe((data:Form) => {
-      this.chart.chart.data.datasets[0].data = [dataStore.currentBudget, data.personalInfo.income - dataStore.currentBudget]
+      
+      this.chart.chart.data.datasets[0].data = [dataStore.currentBudget, data.personalInfo.income / 12 - dataStore.currentBudget]
       this.chart.chart.data.labels = ['unbudgeted','budgeted']
       this.chart.chart.data.datasets[0].backgroundColor = palette('tol', 2).map(hex => '#' + hex)
       
@@ -32,9 +33,7 @@ export class BudgetPieComponent implements OnInit {
           labels: this.chartData.label,
           datasets: [{
             label: "money (dollars)",
-            backgroundColor: palette('tol', this.chartData.data.length).map(function(hex) {
-        return '#' + hex;
-      }),
+            backgroundColor: palette('tol', this.chartData.data.length).map(hex =>'#' + hex),
             data: this.chartData.data
           }]
         },
@@ -45,8 +44,8 @@ export class BudgetPieComponent implements OnInit {
           },
           tooltips: {
             callbacks: {
-              label: function(tooltipItem, data) {
-                return data.datasets[0].data[tooltipItem.datasetIndex].toLocaleString('en-US', { style: 'currency', currency: 'USD' }) ;
+              label: (tooltipItem, data) => {
+                return `${data.labels[tooltipItem.index]}: ${data.datasets[0].data[tooltipItem.index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`;
               }
             }
           }
