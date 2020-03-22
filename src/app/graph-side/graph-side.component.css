@@ -1,11 +1,21 @@
 #graphSide{
     height:100%;
-    overflow:auto;
+    overflow-y: auto;
 }
+
+
+.graphs{
+  margin-top: 5em;
+}
+
 .container{
   display: flex;
   justify-content: flex-end;
   height: 5em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  box-shadow: 10px 10px 5px grey;
 }
 
 .nav{

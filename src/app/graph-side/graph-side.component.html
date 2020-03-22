@@ -1,5 +1,5 @@
-<div class="container">
-        <div class="whiteSpace"></div>
+<div id= 'graphSide'>
+    <div class="container">
         <div class="nav">
                     <div (click) = "dataStore.createNewDoc()" class="nav-link">
                             <span >+</span>
@@ -9,12 +9,10 @@
                         </div>                
             </div>
             
-</div>    
-
-
-
-    <div id= 'graphSide'>
+    </div>
+    <div class="graphs">
         <app-expense-pie-chart class="graph topGraph"></app-expense-pie-chart>
         <app-investment-chart class="graph"></app-investment-chart>
         <app-budget-pie class="graph"></app-budget-pie>
-    </div>
+    </div>  
+</div>
