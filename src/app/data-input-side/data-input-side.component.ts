@@ -33,6 +33,10 @@ export class DataInputSideComponent implements OnInit {
 
   }
 
+  deletePlan() {
+    this.dataService.deletePlan();
+  }
+
 
 
 

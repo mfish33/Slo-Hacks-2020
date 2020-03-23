@@ -5,6 +5,8 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import { Form } from './formModel'
 import { switchMap, map, tap, take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http'
+import { generate } from 'shortid';
+import * as firebase from 'firebase/app';
 
 
 @Injectable({
@@ -15,8 +17,8 @@ export class DataStoreService {
   doc$ = new Subject<Form>();
   update$ = new Subject();
   currentIndex = 0;
-  currentPlan:string
-  plans:string[]
+  currentPlanId:string
+  plans:any
   currentBudget
   currentSub
   doc:Form
@@ -26,55 +28,62 @@ export class DataStoreService {
     }
 
   updateData(PartialSheetInfo:object) {
-    const ref = this.afs.doc(`plans/${this.plans[this.currentIndex]}`)
-    ref.update(PartialSheetInfo)
+    if(this.currentPlanId) {
+      const ref = this.afs.doc(`plans/${this.auth.user.uid}`)
+      ref.set({[this.doc.id]:PartialSheetInfo},{merge:true})
+    }
   }
 
-  createDefaultTemplate() {
+  createDefaultTemplate(id:string,name:string = null) {
     return {
-      personalInfo:{},
-      taxes:{},
-      expenses:[{expense:"gas",weekly:40},{expense:"car Payment", weekly:200}],
-      lifeChoices:{},
-      investment:{}
-    } as Form
+      [id]:{
+        id:id,
+        personalInfo:{
+          sheetName:name,
+          income:null,
+          age:25,
+          state:null,
+        },
+        taxes:{},
+        expenses:[{expense:"gas",weekly:40},{expense:"car Payment", weekly:200}],
+        lifeChoices:{},
+        investment:{
+          '401k':null,
+          '401kContrib':100,
+          IRAType:null,
+          IRAAmount:null,
+          stocks:null
+        }
+      }as Form
+    }
+       
   }
 
   async createNewDoc() {
-    let newDoc = await this.afs.collection('plans').add(this.createDefaultTemplate())
-    this.plans.push(newDoc.id)
-    this.afs.collection('users').doc(this.auth.user.uid).update({plans:this.plans})
-    this.currentIndex++
+    let id = generate()
+    await this.afs.collection('plans').doc(this.auth.user.uid).set(this.createDefaultTemplate(id,`Plan: ${Object.keys(this.plans).length + 1}`),{merge:true})
+    this.switchDoc(id)
   }
 
   switchDoc(docID:string) {
-    this.currentIndex = this.plans.indexOf(docID)
-    this.currentPlan = this.plans[this.currentIndex]
+    this.currentPlanId = docID
     this.subToDoc()
   }
 
   subToDoc() {
     this.currentSub =  this.auth.user$.pipe(
-
-      switchMap(user =>{
-        return this.afs.collection('users').doc(user.uid).snapshotChanges()
-      }),
-      switchMap(doc => {
-        //@ts-ignore
-        let docData:{uid:string,plans?:string[]} = doc.payload.data()
-        this.currentPlan = docData.uid
-        if(!docData.plans) {  
-            doc.payload.ref.update({plans:[docData.uid]})
-            this.plans = [docData.uid]
-        } else {
-          this.plans = docData.plans
-        }
-        return this.afs.collection('plans').doc(this.plans[this.currentIndex]).snapshotChanges() 
-      }),
-
-      switchMap(doc => !doc.payload.exists ? from(doc.payload.ref.set(this.createDefaultTemplate())) : of(doc)),
+      switchMap(user => this.afs.collection('plans').doc(user.uid).snapshotChanges()),
+      switchMap(doc => !doc.payload.exists ?  from(doc.payload.ref.set(this.createDefaultTemplate(generate()))): of(doc)),
       //@ts-ignore
-      map(doc => doc.payload.data()),
+      map(doc =>  doc.payload.data()),
+      tap(plans => this.plans = plans),
+      map(plans => {
+        if(this.currentPlanId) {
+          return plans[this.currentPlanId] as Form
+        }
+        this.currentPlanId = Object.keys(plans)[0]
+        return plans[this.currentPlanId] as Form
+      }),
       tap((doc:Form) => {
         this.doc = doc
         let incomePostTax = doc.taxes.incomeAfterTaxes ? doc.taxes.incomeAfterTaxes / 12: 0
@@ -93,6 +102,18 @@ export class DataStoreService {
       },
       responseType:'blob'
     })
+  }
+
+  deletePlan() {
+    let planIds = Object.keys(this.plans)
+    if(planIds.length > 1) {
+      this.afs.collection('plans').doc(this.auth.user.uid).update({
+        [this.doc.id]:firebase.firestore.FieldValue.delete()
+      })
+
+      this.switchDoc(planIds.filter(id => id !== this.currentPlanId)[0])
+    }
+    
   }
 
 }

@@ -13,7 +13,6 @@ import { format } from 'url';
 
 export class LivingExpensesComponent implements OnInit {
 
-  currentDoc:string
   expenses:FormArray
   private FORM_UPDATE_TAG = 'expenses'
 
@@ -28,13 +27,12 @@ export class LivingExpensesComponent implements OnInit {
       monthly:ex.weekly * 4,
       yearly:ex.weekly * 4 * 12
     }))
-    if(this.expenses.length != doc.expenses.length || doc.personalInfo.sheetName != this.currentDoc) {
+    if(this.expenses.length != doc.expenses.length || doc.id != this.dataStore.doc.id) {
       this.expenses.clear()
       for(let expense of doc.expenses) {
         this.addExpense(expense.expense,expense.weekly)
       }
     }
-    this.currentDoc = doc.personalInfo.sheetName
     })
 
     this.expenses.valueChanges.pipe(
