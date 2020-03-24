@@ -14,5 +14,6 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: ng test
+      - run: npm install -g @angular/cli
+      - run:  ng test --watch=false --browsers=ChromeHeadless
       - run: ng build
