@@ -15,8 +15,8 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm run build
-      - uses: w9jds/firebase-action@master --project polyhacks-2020-56b90
+      - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --only hosting --project polyhacks-2020-56b90
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
