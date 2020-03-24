@@ -1,4 +1,5 @@
 export interface Form{
+    id:string
     personalInfo:{
         sheetName:string,
         income:number,

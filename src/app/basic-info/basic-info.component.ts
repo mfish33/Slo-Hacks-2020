@@ -147,6 +147,6 @@ export class BasicInfoComponent implements OnInit {
     }
 
    get showTaxSection(): boolean {
-      return this.basicInfoForm.get('state').value !== '' && this.basicInfoForm.get('income').value !== 0;
+      return this.basicInfoForm.get('state').value && this.basicInfoForm.get('income').value !== 0;
    }
 }

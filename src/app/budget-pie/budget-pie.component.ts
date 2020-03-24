@@ -18,7 +18,7 @@ export class BudgetPieComponent implements OnInit {
   constructor(dataStore:DataStoreService) {
     dataStore.doc$.subscribe((data:Form) => {
       
-      this.chart.chart.data.datasets[0].data = [dataStore.currentBudget, data.personalInfo.income / 12 - dataStore.currentBudget]
+      this.chart.chart.data.datasets[0].data = [dataStore.currentBudget > 0 ? dataStore.currentBudget: 0, data.personalInfo.income / 12 - dataStore.currentBudget]
       this.chart.chart.data.labels = ['unbudgeted','budgeted']
       this.chart.chart.data.datasets[0].backgroundColor = palette('tol', 2).map(hex => '#' + hex)
       

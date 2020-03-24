@@ -67,7 +67,16 @@ export class InvestmentChartComponent implements OnInit {
               return `${datasetLabel} ` + tooltipItem.yLabel.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) ;
             }
           }
-        }
+        },
+        scales: {
+          yAxes: [{
+              display: true,
+              ticks: {
+                min:0,
+               
+              }
+          }]
+      }
       }
     });
   }
