@@ -15,23 +15,19 @@ export class LivingExpensesComponent implements OnInit {
 
   expenses:FormArray
   private FORM_UPDATE_TAG = 'expenses'
+  currentDocId:string
 
   constructor(private fb: FormBuilder, private dataStore:DataStoreService ) { }
 
   async ngOnInit() {
     this.expenses = this.fb.array([])
     this.dataStore.doc$.pipe().subscribe((doc:Form) => {
-      let update = doc.expenses.map(ex => this.fb.group({
-      expense:ex.expense,
-      weekly:ex.weekly,
-      monthly:ex.weekly * 4,
-      yearly:ex.weekly * 4 * 12
-    }))
-    if(this.expenses.length != doc.expenses.length || doc.id != this.dataStore.doc.id) {
+    if(doc.id != this.currentDocId) {
       this.expenses.clear()
       for(let expense of doc.expenses) {
         this.addExpense(expense.expense,expense.weekly)
       }
+      this.currentDocId = doc.id
     }
     })
 
