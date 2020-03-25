@@ -47,6 +47,13 @@ export class ExpensePieChartComponent implements OnInit {
           title: {
             display: true,
             text: 'Your Monthly expenses (dollars)'
+          },
+          tooltips: {
+            callbacks: {
+              label: (tooltipItem, data) => {
+                return `${data.labels[tooltipItem.index]}: ${data.datasets[0].data[tooltipItem.index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`;
+              }
+            }
           }
         }
     });

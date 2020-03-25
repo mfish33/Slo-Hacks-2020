@@ -34,7 +34,14 @@ export class DataInputSideComponent implements OnInit {
   }
 
   deletePlan() {
-    this.dataService.deletePlan();
+    if(Object.keys(this.dataService.plans).length > 1) {
+      if(confirm(`Are you sure you want to delete ${this.dataService.doc.personalInfo.sheetName} plan`)) {
+        this.dataService.deletePlan();
+      }
+    } else {
+      alert('You need to have at least one plan')
+    }
+    
   }
 
 
