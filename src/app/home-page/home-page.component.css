@@ -1,3 +1,37 @@
-.loginWrapper{
-    width: 40%;
+.container{
+    background-image: linear-gradient(to right, #2366af , #2c7ad0);
+    height: 100%;
+    color:white;
 }
+
+.rowCenter{
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    height: 20%;
+}
+
+svg {
+    width: 8rem;
+    min-width: 2rem;
+    margin: 1rem;
+  }
+
+  h1{
+      font-size: 72px;
+      margin: 1rem;
+  }
+
+  h2{
+      margin: 1rem;
+  }
+  
+  .login{
+      background-color: white;
+      border-radius: 2em;
+      min-width:30%;
+      max-width:500px;
+      color: black;
+  }
