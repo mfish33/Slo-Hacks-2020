@@ -9,6 +9,10 @@ import {DataStoreService} from '../services/data-store.service'
 })
 export class ExpenseWidgetComponent implements OnInit {
 
+  spanCss = `
+  color:${this.dataStore.currentBudget > 0 ? 'green' : 'red'};
+  `
+
   constructor(public dataStore:DataStoreService) { 
   }
 

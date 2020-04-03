@@ -1,6 +1,6 @@
 <mat-card>
     <div class="wrapper">
-            <span>{{dataStore.currentBudget ? dataStore.currentBudget.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 0}}</span>
+            <span class='amount' [ngStyle]="dataStore.currentBudget > 0 ? {'color':'green'} : {'color': 'red'}">{{dataStore.currentBudget ? dataStore.currentBudget.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 0}}</span>
             <span>left to budget</span>
     </div>
     

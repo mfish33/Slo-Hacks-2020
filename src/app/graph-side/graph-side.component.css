@@ -25,13 +25,13 @@
     display: flex;
 }
 
-
-
-  
-  .nav-item {
-
+  .dark-nav-link {
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
   }
-  
+
+
   .nav-item:last-child {
     margin-top: auto;
   }

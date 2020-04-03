@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DataStoreService } from '../services/data-store.service'
 import { Form } from '../services/formModel'
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-graph-side',
   templateUrl: './graph-side.component.html',
   styleUrls: ['./graph-side.component.css']
 })
-export class GraphSideComponent implements OnInit {
+export class GraphSideComponent{
 
   constructor(public dataStore:DataStoreService) { }
 
@@ -20,7 +21,8 @@ export class GraphSideComponent implements OnInit {
     return plan?.personalInfo?.sheetName
   }
 
-  ngOnInit(): void {
+  switchPlan(planId) {
+    this.dataStore.switchDoc(planId)
   }
 
 }
