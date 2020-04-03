@@ -4,7 +4,7 @@
                     <div (click) = "dataStore.createNewDoc()" class="nav-link">
                             <span >+</span>
                         </div>
-                    <div  *ngFor = "let planId of planIds; let i = index"class="nav-link" (click) = "dataStore.switchDoc(planId)">
+                    <div  *ngFor = "let planId of planIds; let i = index"class="nav-link" id="{{planId}}" (click) = "switchPlan(planId)" [ngStyle]=" planId == dataStore.doc.id ? {'background':'var(--bg-secondary)',color: 'var(--text-secondary)',filter: 'grayscale(0%) opacity(1)'} : {} ">
                             <span class = "spanButton" >{{getPlanName(planId) ? getPlanName(planId) : 'Plan: ' + (i+1)}}</span>
                         </div>                
             </div>
